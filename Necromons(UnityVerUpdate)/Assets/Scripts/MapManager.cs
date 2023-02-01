@@ -20,7 +20,8 @@ public class MapManager : MonoBehaviour
 
     private void Update()
     {
-            GameObject.Find("CurrentResources").GetComponent<TextMeshProUGUI>().text = "Current Resources: " + "Feathers " + gm.featherCount + " | " + " Tentacle " + gm.tentacleCount + " | " + " Stones " + gm.stoneCount + " | " + " Wood " + gm.woodCount + " | " + " Ash " + gm.ashCount;
+        if(GameObject.Find("CurrentResources") != null)
+        GameObject.Find("CurrentResources").GetComponent<TextMeshProUGUI>().text = "Current Resources: " + "Feathers " + gm.featherCount + " | " + " Tentacle " + gm.tentacleCount + " | " + " Stones " + gm.stoneCount + " | " + " Wood " + gm.woodCount + " | " + " Ash " + gm.ashCount;
     }
 
     public void SpawnMyMonsters()

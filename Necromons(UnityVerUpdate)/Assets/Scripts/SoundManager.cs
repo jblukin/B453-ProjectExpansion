@@ -12,9 +12,9 @@ public class SoundManager : MonoBehaviour
     }
 
 
-    void Update()
-    {
-        Debug.Log(gm.myCreatures.Count / 10);
+    // void Update()
+    // {
+    //     Debug.Log(gm.myCreatures.Count / 10);
         
-    }
+    // }
 }

@@ -18,6 +18,9 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI tentacleCountUI;
     public TextMeshProUGUI ashCountUI;
     public GameObject resources;
+    public int level;
+    public int raidCount;
+    public int levelUpReq;
     public List<Creature> myCreatures;
 
 
@@ -32,6 +35,12 @@ public class GameManager : MonoBehaviour
         woodCount = 4;
         tentacleCount = 4;
         ashCount = 4;
+
+        level = 1;
+
+        levelUpReq = 5;
+
+        raidCount = 0;
 
 
         if (instance == null)
@@ -86,89 +95,96 @@ public class GameManager : MonoBehaviour
     {
         if (raidMonster != null)
         {
+
+            raidCount++;
+
+            if(raidCount == levelUpReq) { //Leveling up requirement met if true
+
+                raidCount = 0; //reset raid count (amount is equivalent to exp)
+
+                levelUpReq++; //raises levelreq
+
+            }
+
             if (location == "Sky")
             {
                 if (raidMonster.GetComponent<MyMonster>().thisCreature.Type == "Wind")
                 {
                     featherCount += 2 * Random.Range(1, 3);
 
-                    if (Random.Range(1, 4) != 4)
-                    {
+                    
                         ashCount += 2 * Random.Range(1, 3);
-                    }
+                    
 
-                    if (Random.Range(1, 2) == 1)
-                    {
-                        stoneCount += 2 * Random.Range(1, 3);
-                    }
+                    // if (Random.Range(1, 2) == 1)
+                    // {
+                    //     stoneCount += 2 * Random.Range(1, 3);
+                    // }
 
-                    if (Random.Range(1, 4) == 4)
-                    {
-                        woodCount += 2 * Random.Range(1, 3);
-                    }
+                    // if (Random.Range(1, 4) == 4)
+                    // {
+                    //     woodCount += 2 * Random.Range(1, 3);
+                    // }
 
                 }
                 else
                 {
                     featherCount += Random.Range(1, 3);
 
-                    if (Random.Range(1, 4) != 4)
-                    {
+                    
                         ashCount += Random.Range(1, 3);
-                    }
+                    
 
-                    if (Random.Range(1, 2) == 1)
-                    {
-                        stoneCount += Random.Range(1, 3);
-                    }
+                    // if (Random.Range(1, 2) == 1)
+                    // {
+                    //     stoneCount += Random.Range(1, 3);
+                    // }
 
-                    if (Random.Range(1, 4) == 4)
-                    {
-                        woodCount += Random.Range(1, 3);
-                    }
+                    // if (Random.Range(1, 4) == 4)
+                    // {
+                    //     woodCount += Random.Range(1, 3);
+                    // }
                 }
             }
 
             if (location == "Mountains")
             {
-                if (raidMonster.GetComponent<MyMonster>().thisCreature.Type == "Rock")
+                if (raidMonster.GetComponent<MyMonster>().thisCreature.Type == "Stone")
                 {
                     stoneCount += 2 * Random.Range(1, 3);
 
-                    if (Random.Range(1, 4) != 4)
-                    {
-                        featherCount += 2 * Random.Range(1, 3);
-                    }
+                    // if (Random.Range(1, 4) != 4)
+                    // {
+                    //     featherCount += 2 * Random.Range(1, 3);
+                    // }
 
-                    if (Random.Range(1, 2) == 1)
-                    {
-                        woodCount += 2 * Random.Range(1, 3);
-                    }
+                    // if (Random.Range(1, 2) == 1)
+                    // {
+                    //     woodCount += 2 * Random.Range(1, 3);
+                    // }
 
-                    if (Random.Range(1, 4) == 4)
-                    {
+                    
                         tentacleCount += 2 * Random.Range(1, 3);
-                    }
+                    
 
                 }
                 else
                 {
                     stoneCount += Random.Range(1, 3);
 
-                    if (Random.Range(1, 4) != 4)
-                    {
-                        featherCount += Random.Range(1, 3);
-                    }
+                    // if (Random.Range(1, 4) != 4)
+                    // {
+                    //     featherCount += Random.Range(1, 3);
+                    // }
 
-                    if (Random.Range(1, 2) == 1)
-                    {
-                        woodCount += Random.Range(1, 3);
-                    }
+                    // if (Random.Range(1, 2) == 1)
+                    // {
+                    //     woodCount += Random.Range(1, 3);
+                    // }
 
-                    if (Random.Range(1, 4) == 4)
-                    {
+                    
                         tentacleCount += Random.Range(1, 3);
-                    }
+                    
                 }
             }
 
@@ -179,40 +195,36 @@ public class GameManager : MonoBehaviour
                 {
                     woodCount += 2 * Random.Range(1, 3);
 
-                    if (Random.Range(1, 4) != 4)
-                    {
-                        tentacleCount += 2 * Random.Range(1, 3);
-                    }
+                    // if (Random.Range(1, 4) != 4)
+                    // {
+                    //     tentacleCount += 2 * Random.Range(1, 3);
+                    // }
 
-                    if (Random.Range(1, 2) == 1)
-                    {
+                    
                         featherCount += 2 * Random.Range(1, 3);
-                    }
+                    
 
-                    if (Random.Range(1, 4) == 4)
-                    {
+                    
                         stoneCount += 2 * Random.Range(1, 3);
-                    }
+                    
 
                 }
                 else
                 {
                     woodCount += Random.Range(1, 3);
 
-                    if (Random.Range(1, 4) != 4)
-                    {
-                        tentacleCount += Random.Range(1, 3);
-                    }
+                    // if (Random.Range(1, 4) != 4)
+                    // {
+                    //     tentacleCount += Random.Range(1, 3);
+                    // }
 
-                    if (Random.Range(1, 2) == 1)
-                    {
+                    
                         featherCount += Random.Range(1, 3);
-                    }
+                    
 
-                    if (Random.Range(1, 4) == 4)
-                    {
+                    
                         stoneCount += Random.Range(1, 3);
-                    }
+                    
                 }
             }
 
@@ -220,43 +232,41 @@ public class GameManager : MonoBehaviour
             {
                 if (raidMonster.GetComponent<MyMonster>().thisCreature.Type == "Water")
                 {
-                    Debug.Log("HelloThisIsBOB");
+                    //Debug.Log("HelloThisIsBOB");
                     tentacleCount += 2 * Random.Range(1, 3);
 
-                    if (Random.Range(1, 4) != 4)
-                    {
+                    
                         woodCount += 2 * Random.Range(1, 3);
-                    }
+                    
 
-                    if (Random.Range(1, 2) == 1)
-                    {
-                        featherCount += 2 * Random.Range(1, 3);
-                    }
+                    // if (Random.Range(1, 2) == 1)
+                    // {
+                    //     featherCount += 2 * Random.Range(1, 3);
+                    // }
 
-                    if (Random.Range(1, 4) == 4)
-                    {
-                        ashCount += 2 * Random.Range(1, 3);
-                    }
+                    // if (Random.Range(1, 4) == 4)
+                    // {
+                    //     ashCount += 2 * Random.Range(1, 3);
+                    // }
 
                 }
                 else
                 {
                     tentacleCount += Random.Range(1, 3);
 
-                    if (Random.Range(1, 4) != 4)
-                    {
+                    
                         woodCount += Random.Range(1, 3);
-                    }
+                    
 
-                    if (Random.Range(1, 2) == 1)
-                    {
-                        featherCount += Random.Range(1, 3);
-                    }
+                    // if (Random.Range(1, 2) == 1)
+                    // {
+                    //     featherCount += Random.Range(1, 3);
+                    // }
 
-                    if (Random.Range(1, 4) == 4)
-                    {
-                        ashCount += Random.Range(1, 3);
-                    }
+                    // if (Random.Range(1, 4) == 4)
+                    // {
+                    //     ashCount += Random.Range(1, 3);
+                    // }
                 }
             }
 
@@ -266,39 +276,35 @@ public class GameManager : MonoBehaviour
                 {
                     ashCount += 2 * Random.Range(1, 3);
 
-                    if (Random.Range(1, 4) != 4)
-                    {
+                    
                         stoneCount += 2 * Random.Range(1, 3);
-                    }
+                    
 
-                    if (Random.Range(1, 2) == 1)
-                    {
+                    
                         tentacleCount += 2 * Random.Range(1, 3);
-                    }
+                    
 
-                    if (Random.Range(1, 4) == 4)
-                    {
-                        featherCount += 2 * Random.Range(1, 3);
-                    }
+                    // if (Random.Range(1, 4) == 4)
+                    // {
+                    //     featherCount += 2 * Random.Range(1, 3);
+                    // }
                 }
                 else
                 {
                     ashCount += Random.Range(1, 3);
 
-                    if (Random.Range(1, 4) != 4)
-                    {
+                    
                         stoneCount += Random.Range(1, 3);
-                    }
+                    
 
-                    if (Random.Range(1, 2) == 1)
-                    {
+                    
                         tentacleCount += Random.Range(1, 3);
-                    }
+                    
 
-                    if (Random.Range(1, 4) == 4)
-                    {
-                        featherCount += Random.Range(1, 3);
-                    }
+                    // if (Random.Range(1, 4) == 4)
+                    // {
+                    //     featherCount += Random.Range(1, 3);
+                    // }
                 }
             }
         }

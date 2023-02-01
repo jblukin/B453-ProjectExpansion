@@ -29,7 +29,7 @@ public class CreatureManager : MonoBehaviour
 
     void Start()
     {
-        creaturesToLoad = Resources.LoadAll("Images", typeof(Sprite));
+        creaturesToLoad = Resources.LoadAll("StarterImages", typeof(Sprite));
         allCreatures = new List<Creature>();
         GenerateCreatures();
         creatureCard = GameObject.Find("CreatureCard");
@@ -43,7 +43,7 @@ public class CreatureManager : MonoBehaviour
         creatureTentacle = creatureCard.transform.Find("CreatureTentacle").GetComponent<TextMeshProUGUI>();
         creatureAsh = creatureCard.transform.Find("CreatureAsh").GetComponent<TextMeshProUGUI>();
         gm = GameObject.Find("GameManager").GetComponent<GameManager>();
-        rnd = Random.Range(0, creaturesToLoad.Length);
+        //rnd = Random.Range(0, creaturesToLoad.Length);
         audioSource = GameObject.Find("Skeleton_Dance").GetComponent<AudioSource>();
 
 
@@ -61,37 +61,40 @@ public class CreatureManager : MonoBehaviour
     }
     public void GenerateCreatures()
     {
-        //creatures.Add(new Creature("Name", "Typ", HP, Feather, Stone, Wood, Tentacle, Ash));
-        allCreatures.Add(new Creature("Boneknapper", "Water", 8, 2, 0, 3, 4, 1));
-        allCreatures.Add(new Creature("Keplon", "Water", 5, 4, 1, 2, 3, 0));
-        allCreatures.Add(new Creature("Plattypearl", "Water", 5, 3, 1, 0, 4, 2));
-        allCreatures.Add(new Creature("Poisick", "Water", 8, 1, 1, 1, 3, 4));
-        allCreatures.Add(new Creature("Frepard", "Fire", 5, 0, 2, 1, 3, 4));
-        allCreatures.Add(new Creature("Scauldron", "Fire", 8, 1, 4, 0, 2, 3));
-        allCreatures.Add(new Creature("Zkill", "Fire", 8, 1, 4, 1, 1, 1));
-        allCreatures.Add(new Creature("Phex", "Fire", 8, 0, 2, 1, 4, 3));
+        /* creatures.Add(new Creature("Name", "Type", HP, Feather, Stone, Wood, Tentacle, Ash)); (Default Example) */
+
+        // allCreatures.Add(new Creature("Boneknapper", "Water", 8, 2, 0, 3, 4, 1));
+        // allCreatures.Add(new Creature("Keplon", "Water", 5, 4, 1, 2, 3, 0));
+        // allCreatures.Add(new Creature("Plattypearl", "Water", 5, 3, 1, 0, 4, 2));
+        // allCreatures.Add(new Creature("Poisick", "Water", 8, 1, 1, 1, 3, 4));
+        // allCreatures.Add(new Creature("Frepard", "Fire", 5, 0, 2, 1, 3, 4));
+        // allCreatures.Add(new Creature("Scauldron", "Fire", 8, 1, 4, 0, 2, 3));
+        // allCreatures.Add(new Creature("Zkill", "Fire", 8, 1, 4, 1, 1, 1));
+        // allCreatures.Add(new Creature("Phex", "Fire", 8, 0, 2, 1, 4, 3));
         allCreatures.Add(new Creature("Greath", "Wind", 8, 4, 2, 1, 0, 3));
         allCreatures.Add(new Creature("Tribat", "Wind", 5, 3, 0, 2, 1, 4));
         allCreatures.Add(new Creature("Deathstar", "Wind", 8, 1, 4, 1, 1, 1));
         allCreatures.Add(new Creature("Siamcloud", "Wind", 5, 4, 1, 0, 2, 3));
-        allCreatures.Add(new Creature("Werefangs", "Nature", 8, 2, 0, 4, 3, 1));
-        allCreatures.Add(new Creature("Plaguestag", "Nature", 5, 1, 2, 3, 4, 0));
-        allCreatures.Add(new Creature("Nox", "Nature", 5, 0, 1, 3, 4, 2));
+        //allCreatures.Add(new Creature("Werefangs", "Nature", 8, 2, 0, 4, 3, 1));
+        //allCreatures.Add(new Creature("Plaguestag", "Nature", 5, 1, 2, 3, 4, 0));
+        //allCreatures.Add(new Creature("Nox", "Nature", 5, 0, 1, 3, 4, 2));
         allCreatures.Add(new Creature("Skullington", "Stone", 8, 3, 4, 2, 0, 1));
         allCreatures.Add(new Creature("Cafear", "Stone", 5, 4, 3, 0, 1, 2));
         allCreatures.Add(new Creature("Flashnight", "Stone", 5, 3, 4, 1, 2, 0));
 
 
         allCreatures.Sort();
+        
     }
 
     public void RandomizedNumber()
     {
-        rnd = Random.Range(0, creaturesToLoad.Length);
+        rnd = Random.Range(0, allCreatures.Count);
     }
 
     public void CreatureSpawn()
     {
+        Debug.Log("Spawning");
         RandomizedNumber();
         currentCreatureImage = (Sprite)creaturesToLoad[rnd];
         for (int i = 0; i < allCreatures.Count; i++)
@@ -110,6 +113,7 @@ public class CreatureManager : MonoBehaviour
 
     public void RefreshCreatureCard()
     {
+        Debug.Log("Refreshing");
         creatureName.text = currentCreature.Name;
         creatureImage.sprite = currentCreatureImage;
         creatureHP.text = currentCreature.HP.ToString();
@@ -123,7 +127,7 @@ public class CreatureManager : MonoBehaviour
 
     IEnumerator TimeToSpawn()
     {
-        yield return new WaitForSeconds(Random.Range(2,5));
+        yield return new WaitForSeconds(1.0f);
         CreatureSpawn();
     }
 
