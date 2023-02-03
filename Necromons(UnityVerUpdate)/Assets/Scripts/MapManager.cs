@@ -20,8 +20,13 @@ public class MapManager : MonoBehaviour
 
     private void Update()
     {
-        if(GameObject.Find("CurrentResources") != null)
+        if(GameObject.Find("CurrentResources") != null) 
         GameObject.Find("CurrentResources").GetComponent<TextMeshProUGUI>().text = "Current Resources: " + "Feathers " + gm.featherCount + " | " + " Tentacle " + gm.tentacleCount + " | " + " Stones " + gm.stoneCount + " | " + " Wood " + gm.woodCount + " | " + " Ash " + gm.ashCount;
+        
+
+        if(GameObject.Find("LevelText") != null)
+        GameObject.Find("LevelText").GetComponent<TextMeshProUGUI>().text = "Lvl: " + gm.level;
+
     }
 
     public void SpawnMyMonsters()

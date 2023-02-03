@@ -11,6 +11,8 @@ public class MyMonster : MonoBehaviour
     GameObject managers;
     public int id;
 
+    public int initialHP;
+
     private void Awake()
     {
         managers = GameObject.Find("GameManager");
@@ -24,6 +26,7 @@ public class MyMonster : MonoBehaviour
         transform.Find("MyMonsterTyp").GetComponent<TextMeshProUGUI>().text = thisCreature.Type;
         transform.Find("MyMonsterName").GetComponent<TextMeshProUGUI>().text = thisCreature.Name;
         GetComponent<Button>().onClick.AddListener(TaskOnClick);
+        initialHP = thisCreature.HP;
     }
 
     void TaskOnClick()
@@ -42,14 +45,15 @@ public class MyMonster : MonoBehaviour
         Image img = GetComponent<Image>();
         btn.interactable = false;
         img.color = new Color32(123, 57, 57, 255);
-        yield return new WaitForSeconds(Random.Range(5, 15));
+        yield return new WaitForSeconds(5.0f);
         btn.interactable = true;
         img.color = new Color32(81, 81, 81, 255);
         Debug.Log(thisCreature.HP);
         transform.Find("MyMonsterHP").GetComponent<TextMeshProUGUI>().text = thisCreature.HP.ToString();
         if(thisCreature.HP <= 0)
         {
-            managers.GetComponent<GameManager>().myCreatures.Remove(thisCreature);
+            //managers.GetComponent<GameManager>().myCreatures.Remove(thisCreature);
+            thisCreature.HP = initialHP;
             GameObject.Destroy(gameObject);
         }
     }

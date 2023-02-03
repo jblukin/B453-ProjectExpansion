@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class GameManager : MonoBehaviour
@@ -18,6 +19,8 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI tentacleCountUI;
     public TextMeshProUGUI ashCountUI;
     public GameObject resources;
+
+    public GameObject areas;
     public int level;
     public int raidCount;
     public int levelUpReq;
@@ -67,6 +70,8 @@ public class GameManager : MonoBehaviour
         ashCountUI = resources.transform.Find("AshCount").GetComponent<TextMeshProUGUI>();
         myCreatures = new List<Creature>();
 
+        areas = GameObject.Find("Areas");
+
         RefreshResources();
     }
 
@@ -98,11 +103,34 @@ public class GameManager : MonoBehaviour
 
             raidCount++;
 
+            Debug.Log("RaidCount: " + raidCount);
+
             if(raidCount == levelUpReq) { //Leveling up requirement met if true
+
+            Debug.Log("Leveled Up");
 
                 raidCount = 0; //reset raid count (amount is equivalent to exp)
 
                 levelUpReq++; //raises levelreq
+
+                level++; //raises level
+
+                if(level == 3) { 
+
+                    areas.transform.Find("Forest").GetComponent<Button>().interactable = true;
+                    areas.transform.Find("Forest").GetChild(1).gameObject.SetActive(false);
+
+                }
+
+                if(level == 5) {
+
+                    areas.transform.Find("Ocean").GetComponent<Button>().interactable = true;
+                    areas.transform.Find("Ocean").GetChild(1).gameObject.SetActive(false);
+
+                    areas.transform.Find("Vulcano").GetComponent<Button>().interactable = true;
+                    areas.transform.Find("Vulcano").GetChild(1).gameObject.SetActive(false);
+
+                }
 
             }
 
@@ -158,13 +186,13 @@ public class GameManager : MonoBehaviour
                     //     featherCount += 2 * Random.Range(1, 3);
                     // }
 
-                    // if (Random.Range(1, 2) == 1)
-                    // {
-                    //     woodCount += 2 * Random.Range(1, 3);
-                    // }
+                    if (Random.Range(1, 2) == 1)
+                    {
+                        woodCount += 2 * Random.Range(1, 3);
+                    }
 
                     
-                        tentacleCount += 2 * Random.Range(1, 3);
+                    tentacleCount += 2 * Random.Range(1, 3);
                     
 
                 }
@@ -177,10 +205,10 @@ public class GameManager : MonoBehaviour
                     //     featherCount += Random.Range(1, 3);
                     // }
 
-                    // if (Random.Range(1, 2) == 1)
-                    // {
-                    //     woodCount += Random.Range(1, 3);
-                    // }
+                    if (Random.Range(1, 2) == 1)
+                    {
+                        woodCount += Random.Range(1, 3);
+                    }
 
                     
                         tentacleCount += Random.Range(1, 3);
