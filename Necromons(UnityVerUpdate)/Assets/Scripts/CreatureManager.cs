@@ -186,7 +186,7 @@ public class CreatureManager : MonoBehaviour
 
         }
 
-        if(gm.level == 7 && oceanAdd == false && vulcanoAdd == false) {
+        if(gm.level == 5 && oceanAdd == false && vulcanoAdd == false) {
 
         allCreatures.Add(new Creature("Boneknapper", "Water", 8, 2, 0, 4, 4, 0));
         allCreatures.Add(new Creature("Keplon", "Water", 7, 4, 0, 2, 3, 0));
